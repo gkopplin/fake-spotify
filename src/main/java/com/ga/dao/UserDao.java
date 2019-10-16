@@ -1,7 +1,7 @@
 package com.ga.dao;
 
 import java.util.List;
-
+import com.ga.entity.Song;
 import com.ga.entity.User;
 
 public interface UserDao {
@@ -11,5 +11,7 @@ public interface UserDao {
 	User signup(User user);
 
 	User login(User user);
+	
+	List<Song> listSongs(Long userId);
 
 }

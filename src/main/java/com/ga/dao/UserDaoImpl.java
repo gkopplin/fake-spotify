@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ga.entity.Song;
 import com.ga.entity.User;
 
 @Repository
@@ -59,5 +60,25 @@ public class UserDaoImpl implements UserDao {
 	public List<User> listUsers() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public List<Song> listSongs(Long userId) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		List<Song> resultSongs;
+		
+		try {
+			session.beginTransaction();
+			
+			User fetchedUser = session.get(User.class, userId);
+			
+			resultSongs = fetchedUser.getSongs();
+			
+		} finally {
+			session.close();
+		}
+		
+		return resultSongs;
 	}
 }

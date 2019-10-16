@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ga.dao.UserDao;
+import com.ga.entity.Song;
 import com.ga.entity.User;
 
 
@@ -27,5 +28,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User login(User user) {
 		return userDao.login(user);
+	}
+
+	@Override
+	public List<Song> listSongs(Long userId) {
+		return userDao.listSongs(userId);
 	}
 }
