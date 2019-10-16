@@ -13,8 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name="songs")
 public class Song {
 
 	@Id
@@ -25,7 +29,10 @@ public class Song {
 	@Column(nullable = false)
 	private String title;
 	
-	@Column
+	@Column(nullable = false)
+	private int length;
+	
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinTable(name = "user_songs", joinColumns = {
 			@JoinColumn(name = "song_id") }, inverseJoinColumns = @JoinColumn(name = "user_id"))
@@ -63,4 +70,14 @@ public class Song {
     	
     	return this.users;
     }
+
+	public int getLength() {
+		return length;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+	
+	
 }

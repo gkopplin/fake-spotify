@@ -34,4 +34,11 @@ public class UserServiceImpl implements UserService {
 	public List<Song> listSongs(Long userId) {
 		return userDao.listSongs(userId);
 	}
+
+	@Override
+	public List<Song> addSong(Long userId, Long songId) {
+		return userDao.addSong(userId, songId);
+	}
+	
+	
 }

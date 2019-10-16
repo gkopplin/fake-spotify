@@ -14,5 +14,7 @@ public interface UserService {
 	User login(User user);
 	
 	List<Song> listSongs(Long userId);
+	
+	List<Song> addSong(Long userId, Long songId);
 		
 }

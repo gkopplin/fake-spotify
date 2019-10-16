@@ -81,4 +81,27 @@ public class UserDaoImpl implements UserDao {
 		
 		return resultSongs;
 	}
+	
+	@Override
+	public List<Song> addSong(Long userId, Long songId) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		List<Song> resultSongs;
+		
+		try {
+			session.beginTransaction();
+			
+			User fetchedUser = session.get(User.class, userId);
+			Song fetchedSong = session.get(Song.class, songId);
+			
+			fetchedUser.addSong(fetchedSong);
+			
+			resultSongs = fetchedUser.getSongs();
+			
+		} finally {
+			session.close();
+		}
+		
+		return resultSongs;
+	}
 }
