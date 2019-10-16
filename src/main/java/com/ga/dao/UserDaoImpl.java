@@ -95,8 +95,10 @@ public class UserDaoImpl implements UserDao {
 			Song fetchedSong = session.get(Song.class, songId);
 			
 			fetchedUser.addSong(fetchedSong);
+			session.getTransaction().commit();
 			
 			resultSongs = fetchedUser.getSongs();
+			
 			
 		} finally {
 			session.close();

@@ -1,5 +1,7 @@
 package com.ga.dao;
 
-public interface SongDao {
+import com.ga.entity.Song;
 
+public interface SongDao {
+	public Song createSong(Song song);
 }

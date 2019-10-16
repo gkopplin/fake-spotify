@@ -1,5 +1,7 @@
 package com.ga.service;
 
-public interface SongService {
+import com.ga.entity.Song;
 
+public interface SongService {
+	public Song createSong(Song song);
 }

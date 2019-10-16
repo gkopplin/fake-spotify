@@ -41,8 +41,8 @@ public class UserController {
 		return userService.listSongs(userId);
 	}
 	
-	@PostMapping("/{userId}")
-	public List<Song> addSong(@PathVariable Long userId, @RequestBody Long songId) {
+	@PostMapping("/{userId}/song/{songId}")
+	public List<Song> addSong(@PathVariable Long userId, @PathVariable Long songId) {
 		return userService.addSong(userId, songId);
 	}
 }
