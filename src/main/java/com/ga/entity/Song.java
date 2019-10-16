@@ -36,7 +36,7 @@ public class Song {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinTable(name = "user_songs", joinColumns = {
 			@JoinColumn(name = "song_id") }, inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> users;
+	private List<User> users;
 
 	public Long getSongId() {
 		return songId;

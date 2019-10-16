@@ -2,6 +2,7 @@ package com.ga.dao;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,7 @@ public class UserDaoImpl implements UserDao {
 			User fetchedUser = session.get(User.class, userId);
 			
 			resultSongs = fetchedUser.getSongs();
+			Hibernate.initialize(resultSongs);
 			
 		} finally {
 			session.close();
