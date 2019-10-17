@@ -11,7 +11,8 @@ public interface UserService {
 
 	User signup(User user);
 
-	User login(User user);
+//	User login(User user);
+	public String login(User user);
 	
 	List<Song> listSongs(Long userId);
 	

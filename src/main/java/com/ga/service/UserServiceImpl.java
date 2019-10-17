@@ -3,8 +3,10 @@ package com.ga.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import com.ga.config.JwtUtil;
 import com.ga.dao.UserDao;
 import com.ga.entity.Song;
 import com.ga.entity.User;
@@ -26,9 +28,23 @@ public class UserServiceImpl implements UserService {
 		return userDao.signup(user);
 	}
 
+//	@Override
+//	public User login(User user) {
+//		return userDao.login(user);
+//	}
+	
+	@Autowired
+    JwtUtil jwtUtil;
+
 	@Override
-	public User login(User user) {
-		return userDao.login(user);
+	public String login(User user) {
+		if(userDao.login(user) != null) {
+            		UserDetails userDetails = loadUserByUsername(user.getUsername());
+            		
+			return jwtUtil.generateToken(userDetails);
+        	}
+        
+		return null;
 	}
 
 	@Override
