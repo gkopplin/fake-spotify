@@ -33,6 +33,7 @@ public class UserController {
 	public List<User> listUsers() {
 		return userService.listUsers();
 	}
+	
 	@PostMapping("/signup")
 	public ResponseEntity<?> signup(@RequestBody User user) {
         	return ResponseEntity.ok(new JwtResponse(userService.signup(user)));
