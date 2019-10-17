@@ -100,6 +100,36 @@ public class UserDaoImpl implements UserDao {
 				Song fetchedSong = session.get(Song.class, songId);
 				
 				fetchedUser.addSong(fetchedSong);
+				session.saveOrUpdate(fetchedUser);
+				session.getTransaction().commit();
+				
+				resultSongs = fetchedUser.getSongs();
+			}
+			
+			
+		} finally {
+			session.close();
+		}
+		
+		return resultSongs;
+	}
+
+	@Override
+	public List<Song> removeSong(Long userId, Long songId) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		List<Song> resultSongs = null;
+		
+		try {
+			session.beginTransaction();
+			
+			User fetchedUser = session.get(User.class, userId);
+			
+			if (fetchedUser != null) {
+				
+				fetchedUser.removeSong(songId);
+				
+				session.saveOrUpdate(fetchedUser);
 				session.getTransaction().commit();
 				
 				resultSongs = fetchedUser.getSongs();

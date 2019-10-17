@@ -16,5 +16,7 @@ public interface UserService {
 	List<Song> listSongs(Long userId);
 	
 	List<Song> addSong(Long userId, Long songId);
+	
+	List<Song> removeSong(Long userId, Long songId);
 		
 }

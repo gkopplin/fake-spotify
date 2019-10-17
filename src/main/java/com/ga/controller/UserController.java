@@ -3,6 +3,7 @@ package com.ga.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,5 +45,10 @@ public class UserController {
 	@PostMapping("/{userId}/song/{songId}")
 	public List<Song> addSong(@PathVariable Long userId, @PathVariable Long songId) {
 		return userService.addSong(userId, songId);
+	}
+	
+	@DeleteMapping("/{userId}/song/{songId}")
+	public List<Song> removeSong(@PathVariable Long userId, @PathVariable Long songId) {
+		return userService.removeSong(userId, songId);
 	}
 }
