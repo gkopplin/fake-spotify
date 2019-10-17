@@ -52,7 +52,7 @@ public class UserDaoImpl implements UserDao {
 		try {
 			session.beginTransaction();
 			resultUser = (User) session.createQuery("FROM User u WHERE u.username = '" + user.getUsername()
-					+ "' AND u.password = '" + user.getPassword() + "'").getSingleResult();
+					+ "'").getSingleResult();
 		} finally {
 			session.close();
 		}
