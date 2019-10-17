@@ -10,9 +10,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.ga.service.UserService;
 
@@ -21,6 +21,9 @@ import com.ga.service.UserService;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @ComponentScan("com.ga")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+    private JwtRequestFilter jwtRequestFilter;
 	
 	@Bean("encoder")
 	public PasswordEncoder encoder() {
@@ -57,6 +60,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        .and()
 	        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	    
-//	    http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+	    http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 }
