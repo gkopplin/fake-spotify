@@ -22,6 +22,15 @@ public class UserController {
 	@Autowired 
 	UserService userService;
 	
+	@GetMapping("/hello")
+	public String hello() {
+		return "Hello World!";
+	}
+	
+	@GetMapping("/list")
+	public List<User> listUsers() {
+		return userService.listUsers();
+	}
 	@PostMapping("/signup")
 	public User signup(@RequestBody User user) {
 		return userService.signup(user);
