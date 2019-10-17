@@ -2,6 +2,7 @@ package com.ga.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -91,6 +92,15 @@ public class User {
     		this.songs = new ArrayList<>();
     	}
     	this.songs.add(song);
+    	
+    	return this.songs;
+    }
+    
+    public List<Song> removeSong(Long songId) {
+    	
+    	this.songs = this.songs.stream()
+    		.filter(song -> song.getSongId() != songId)
+    		.collect(Collectors.toList());
     	
     	return this.songs;
     }
