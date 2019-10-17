@@ -18,15 +18,13 @@ public class UserRole {
     private String name;
     
     
-    @ManyToOne(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE, CascadeType.REFRESH})
-	@JoinColumn(name = "user_role_id", nullable = false)
-	private UserRole userRole;
-	    
-	public UserRole getUserRole() { return userRole; }
+    @OneToMany(mappedBy = "userRole", cascade = CascadeType.ALL)
+	private List<User> users;
 	
-	public void setUserRole(UserRole userRole) { this.userRole = userRole; }
-    
+	public void setUsers(List<User> users) { this.users = users; }
+
+    public List<User> getUsers() { return users; }
+
 
     public UserRole() {}
 
