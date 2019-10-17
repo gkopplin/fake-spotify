@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -37,7 +38,20 @@ public class User {
 	@JoinTable(name = "user_songs", joinColumns = {
 			@JoinColumn(name = "user_id") }, inverseJoinColumns = @JoinColumn(name = "song_id"))
     private List<Song> songs;
+    
+    
+    
+    @ManyToOne(cascade = {CascadeType.DETACH,
+            CascadeType.MERGE, CascadeType.REFRESH})
+	@JoinColumn(name = "user_role_id", nullable = false)
+	private UserRole userRole;
+	    
+	public UserRole getUserRole() { return userRole; }
+	
+	public void setUserRole(UserRole userRole) { this.userRole = userRole; }
 
+	
+	
     public User() {}
     
     public Long getUserId() {
