@@ -17,4 +17,7 @@ public interface UserDao {
 	List<Song> addSong(Long userId, Long songId);
 
 	List<Song> removeSong(Long userId, Long songId);
+	
+	public User getUserByUsername(String username);
+
 }

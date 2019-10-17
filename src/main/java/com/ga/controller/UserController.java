@@ -3,6 +3,7 @@ package com.ga.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ga.entity.JwtResponse;
 import com.ga.entity.Song;
 import com.ga.entity.User;
 import com.ga.service.UserService;
@@ -32,14 +34,14 @@ public class UserController {
 		return userService.listUsers();
 	}
 	@PostMapping("/signup")
-	public User signup(@RequestBody User user) {
-		return userService.signup(user);
-	}
+	public ResponseEntity<?> signup(@RequestBody User user) {
+        	return ResponseEntity.ok(new JwtResponse(userService.signup(user)));
+    	}
 	
-	@PostMapping("/login")
-	public User login(@RequestBody User user) {
-		return userService.login(user);
-	}
+	 @PostMapping("/login")
+	    public ResponseEntity<?> login(@RequestBody User user) {
+	        return ResponseEntity.ok(new JwtResponse(userService.login(user)));
+	    }
 	
 	@GetMapping("/{userId}")
 	public List<Song> listSongs(@PathVariable Long userId) {

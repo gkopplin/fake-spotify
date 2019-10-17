@@ -155,4 +155,22 @@ public class UserDaoImpl implements UserDao {
 
 		return resultSongs;
 	}
+	
+	@Override
+	public User getUserByUsername(String username) {
+		User user = null;
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			session.beginTransaction();
+			
+			user = (User)session.createQuery("FROM User u WHERE u.username = '" + 
+				username + "'").uniqueResult();
+		} finally {
+			session.close();
+		}
+		
+		return user;
+	}
 }
