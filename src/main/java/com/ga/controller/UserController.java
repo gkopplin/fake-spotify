@@ -22,11 +22,6 @@ public class UserController {
 	@Autowired 
 	UserService userService;
 	
-	@GetMapping("/hello")
-	public String hello() {
-		return "Hello World!";
-	}
-	
 	@PostMapping("/signup")
 	public User signup(@RequestBody User user) {
 		return userService.signup(user);
