@@ -10,24 +10,28 @@ import org.springframework.stereotype.Repository;
 
 import com.ga.entity.Song;
 import com.ga.entity.User;
+import com.ga.entity.UserRole;
 
 @Repository
 public class UserDaoImpl implements UserDao {
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Autowired
+	private UserRoleDao userRoleDao;
 
 	@Override
 	public User signup(User user) {
-//		String roleName = user.getUserRole().getName();
+		String roleName = user.getUserRole().getName();
 
-//		UserRole userRole = userRoleDao.getRole(roleName);
+		UserRole userRole = userRoleDao.getRole(roleName);
 //		
 		Session session = sessionFactory.getCurrentSession();
 
 		try {
 			session.beginTransaction();
 
-//			user.setUserRole(userRole);
+			user.setUserRole(userRole);
 
 			session.save(user);
 

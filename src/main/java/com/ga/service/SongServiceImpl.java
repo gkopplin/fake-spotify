@@ -10,7 +10,7 @@ import com.ga.entity.Song;
 public class SongServiceImpl implements SongService {
 	
 	@Autowired
-	SongDao songDao;
+	private SongDao songDao;
 
 	@Override
 	public Song createSong(Song song) {
