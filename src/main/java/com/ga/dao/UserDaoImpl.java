@@ -173,4 +173,46 @@ public class UserDaoImpl implements UserDao {
 		
 		return user;
 	}
+	
+	@Override
+	public User updateUser(User user, Long userId) {
+		User savedUser = null;
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		try {
+			session.beginTransaction();
+			
+			savedUser = session.get(User.class, userId);
+			savedUser.setPassword(user.getPassword());
+			
+			session.update(savedUser);
+			
+			session.getTransaction().commit();
+		} finally {
+			session.close();
+		}
+		
+		return savedUser;
+	}
+	
+	@Override
+	public Long deleteUser(Long userId) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		User savedUser = null;
+		
+		try {
+			session.beginTransaction();
+			
+			savedUser = session.get(User.class, userId);
+			session.delete(savedUser);
+			
+			session.getTransaction().commit();
+		} finally {
+			session.close();
+		}
+		
+		return savedUser.getUserId();
+	}
 }

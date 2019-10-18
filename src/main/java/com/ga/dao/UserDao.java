@@ -19,5 +19,9 @@ public interface UserDao {
 	List<Song> removeSong(Long userId, Long songId);
 	
 	public User getUserByUsername(String username);
+	
+	public User updateUser(User user, Long userId);
+	
+	public Long deleteUser(Long userId);
 
 }

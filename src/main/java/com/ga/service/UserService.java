@@ -21,5 +21,9 @@ public interface UserService extends UserDetailsService {
 	List<Song> addSong(Long userId, Long songId);
 	
 	List<Song> removeSong(Long userId, Long songId);
+	
+	public User updateUser(User user, Long userId);
+	
+	public Long deleteUser(Long userId);
 		
 }

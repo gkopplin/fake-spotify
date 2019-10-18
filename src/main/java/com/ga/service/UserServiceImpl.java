@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public List<User> listUsers() {
-		return null;
+		return userDao.listUsers();
 	}
 	
 	@Override
@@ -96,5 +96,16 @@ public class UserServiceImpl implements UserService {
 		return userDao.removeSong(userId, songId);
 	}
 	
+	
+	@Override
+	public User updateUser(User user, Long userId) {
+		return userDao.updateUser(user, userId);
+	}
+	
+	@Override
+	public Long deleteUser(Long userId) {
+		return userDao.deleteUser(userId);
+	}
+
 	
 }
