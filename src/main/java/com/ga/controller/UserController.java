@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,11 @@ public class UserController {
 	    public ResponseEntity<?> login(@RequestBody User user) {
 	        return ResponseEntity.ok(new JwtResponse(userService.login(user)));
 	    }
+	 
+	 @PutMapping("/{userId}")
+		public User updateUser(@RequestBody User user, @PathVariable Long userId) {
+			return userService.updateUser(user, userId);
+		}
 	
 	@GetMapping("/{userId}")
 	public List<Song> listSongs(@PathVariable Long userId) {
@@ -58,4 +64,10 @@ public class UserController {
 	public List<Song> removeSong(@PathVariable Long userId, @PathVariable Long songId) {
 		return userService.removeSong(userId, songId);
 	}
+	
+	@DeleteMapping("/{userId}")
+	public Long deleteUser(@PathVariable Long userId) {
+		return userService.deleteUser(userId);
+	}
+
 }

@@ -97,4 +97,15 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	
+	@Override
+	public User updateUser(User user, Long userId) {
+		return userDao.updateUser(user, userId);
+	}
+	
+	@Override
+	public Long deleteUser(Long userId) {
+		return userDao.deleteUser(userId);
+	}
+
+	
 }
