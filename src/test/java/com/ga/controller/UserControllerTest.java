@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.ga.entity.UserRole;
 import com.ga.service.UserService;
 
 import org.junit.Test;
@@ -39,6 +40,12 @@ public class UserControllerTest {
 	@Mock
 	private UserService userService;
 	
+	@Mock
+	private UserRole userRole;
+	
+	
+	
+	//test helloWorld
 	@Test
 	public void helloWorld_HelloWorld_Success() throws Exception {
 		RequestBuilder requestBuilder = MockMvcRequestBuilders
@@ -50,6 +57,9 @@ public class UserControllerTest {
 		   .andExpect(content().string("Hello World!"));
 	}
 	
+	
+	
+	//test signUp
 	@Test
 	public void signup_User_Success() throws Exception{
 		RequestBuilder requestBuilder = MockMvcRequestBuilders
@@ -75,6 +85,29 @@ public class UserControllerTest {
     private static String createUserRoleInJson(String role) {
     	return "\"name\":\"" + role + "\"}";
     }
+    
+    
+    
+    
+    //test login
+    @Test
+	public void login_User_Success() throws Exception{
+		RequestBuilder requestBuilder = MockMvcRequestBuilders
+			       .post("/user/login")
+			       .contentType(MediaType.APPLICATION_JSON)
+			       .content(createUserInJson2("joe","abc"));
+		
+		when(userService.login(any())).thenReturn("123456");
+		
+		mockMvc.perform(requestBuilder)
+          .andExpect(status().isOk())
+          .andExpect(content().json("{\"token\":\"123456\"}"));
+	}
+    
+    private static String createUserInJson2(String username, String password) {
+   	 return "{ \"username\": \"" + username + "\", " +
+                "\"password\":\"" + password + "\"}";
+   }
 
 	
 	
