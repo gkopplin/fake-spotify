@@ -1,5 +1,7 @@
 package com.ga.dao;
 
+import org.hibernate.Query;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
 			session.beginTransaction();
 			
 			userRole = (UserRole) session.createQuery("FROM UserRole r WHERE r.name = '" + 
-				roleName + "'").uniqueResult();
+				roleName + "'").getSingleResult();
 		} finally {
 			session.close();
 		}
