@@ -16,6 +16,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
@@ -40,8 +41,10 @@ public class UserRoleDaoTest {
     @Mock
     Transaction transaction;
     
+//    @Mock
+//    TypedQuery<?> query;
     @Mock
-    TypedQuery<?> query;
+    QueryUtil queryUtil;
     
     @Before
     public void initializeDummyUserRole() {
@@ -60,15 +63,16 @@ public class UserRoleDaoTest {
         assertEquals(result, userRole);
     }
     
-//    @Test
-//    public void getRole_Role_Success() {  
-//    	when(session.createQuery(anyString())).thenReturn( (Query) query);
-//    	when(((Query) query).uniqueResult()).thenReturn(userRole);
-//    	
-//        UserRole result = userRoleDao.getRole("ROLE_ADMIN");
-//        
-//        assertNotNull("Test returned null object, expected non-null", result);
-//        assertEquals(result, userRole);
-//    }
+    @Test
+    public void getRole_Role_Success() {  
+    	Query query = Mockito.mock(Query.class);
+    	when(session.createQuery(anyString())).thenReturn(query);
+    	when((query).getSingleResult()).thenReturn(userRole);
+    	
+        UserRole result = userRoleDao.getRole("ROLE_ADMIN");
+        
+        assertNotNull("Test returned null object, expected non-null", result);
+        assertEquals(result, userRole);
+    }
     
 }
