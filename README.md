@@ -9,6 +9,9 @@
     - Differentiate between createSong endpoint and songs for a specific user
     - Able to pass user Id as params
 - One to many relationship for Users to UserRoles
+- Users' songs stored in User instance variable
+    - Easy access and avoids unnecessary "profile" class
 
 # Challenges 
 - Mocking database queries
+- Not as much time for pair programming
