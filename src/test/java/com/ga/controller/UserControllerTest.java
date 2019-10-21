@@ -61,29 +61,25 @@ public class UserControllerTest {
 	
 	//test signUp
 	@Test
-	public void signup_User_Success() throws Exception{
+	public void signup_User_Success() throws Exception {
 		RequestBuilder requestBuilder = MockMvcRequestBuilders
-				.post("user/signup")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(createUserInJson("joe", "abc", "ROLE_ADMIN"));
+			       .post("/user/signup")
+			       .contentType(MediaType.APPLICATION_JSON)
+			       .content(createUserInJson("joe","abc"));
 		
 		when(userService.signup(any())).thenReturn("123456");
 		
 		MvcResult result = mockMvc.perform(requestBuilder)
-				   .andExpect(status().isOk())
-				   .andExpect(content().json("{\"token\":\"123456\"}"))
-				   .andReturn();
-
-				System.out.println(result.getResponse().getContentAsString()); 
+	              .andExpect(status().isOk())
+	              .andExpect(content().json("{\"token\":\"123456\"}"))
+	              .andReturn();
+	      
+	      System.out.println(result.getResponse().getContentAsString());
 	}
 	
-    private static String createUserInJson(String username, String password, String role) {
+	private static String createUserInJson(String username, String password) {
         return "{ \"username\": \"" + username + "\", " +
-                "\"password\":\"" + password + "\"," + "{\"userRole\": \"" + createUserRoleInJson(role) + "\"}";
-    }
-    
-    private static String createUserRoleInJson(String role) {
-    	return "\"name\":\"" + role + "\"}";
+                "\"password\":\"" + password + "\"}";
     }
     
     
@@ -108,9 +104,6 @@ public class UserControllerTest {
    	 return "{ \"username\": \"" + username + "\", " +
                 "\"password\":\"" + password + "\"}";
    }
-
-	
-	
-	
+    
 
 }
