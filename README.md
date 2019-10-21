@@ -15,3 +15,9 @@
 # Challenges 
 - Mocking database queries
 - Not as much time for pair programming
+- Use "When" for the Mocking test
+
+# Went well
+- Finished all the requirements on time
+- Have a good working flow, use Trello to sign the tasks
+- No merge conflict in git
