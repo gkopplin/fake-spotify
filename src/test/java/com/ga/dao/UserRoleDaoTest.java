@@ -41,11 +41,6 @@ public class UserRoleDaoTest {
     @Mock
     Transaction transaction;
     
-//    @Mock
-//    TypedQuery<?> query;
-    @Mock
-    QueryUtil queryUtil;
-    
     @Before
     public void initializeDummyUserRole() {
         userRole.setRoleId(1);
