@@ -22,51 +22,51 @@ import com.ga.service.UserService;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-	
-	@Autowired 
+
+	@Autowired
 	UserService userService;
-	
+
 	@GetMapping("/hello")
 	public String hello() {
 		return "Hello World!";
 	}
-	
+
 //	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/list")
 	public List<User> listUsers() {
 		return userService.listUsers();
 	}
-	
+
 	@PostMapping("/signup")
 	public ResponseEntity<?> signup(@RequestBody User user) {
-        	return ResponseEntity.ok(new JwtResponse(userService.signup(user)));
-    	}
-	
-	 @PostMapping("/login")
-	    public ResponseEntity<?> login(@RequestBody User user) {
-	        return ResponseEntity.ok(new JwtResponse(userService.login(user)));
-	    }
-	 
-	 @PutMapping("/{userId}")
-		public User updateUser(@RequestBody User user, @PathVariable Long userId) {
-			return userService.updateUser(user, userId);
-		}
-	
+		return ResponseEntity.ok(new JwtResponse(userService.signup(user)));
+	}
+
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody User user) {
+		return ResponseEntity.ok(new JwtResponse(userService.login(user)));
+	}
+
+	@PutMapping("/{userId}")
+	public User updateUser(@RequestBody User user, @PathVariable Long userId) {
+		return userService.updateUser(user, userId);
+	}
+
 	@GetMapping("/{userId}")
 	public List<Song> listSongs(@PathVariable Long userId) {
 		return userService.listSongs(userId);
 	}
-	
+
 	@PostMapping("/{userId}/song/{songId}")
 	public List<Song> addSong(@PathVariable Long userId, @PathVariable Long songId) {
 		return userService.addSong(userId, songId);
 	}
-	
+
 	@DeleteMapping("/{userId}/song/{songId}")
 	public List<Song> removeSong(@PathVariable Long userId, @PathVariable Long songId) {
 		return userService.removeSong(userId, songId);
 	}
-	
+
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{userId}")
 	public Long deleteUser(@PathVariable Long userId) {
